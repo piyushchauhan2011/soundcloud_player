@@ -1,0 +1,102 @@
+body {
+  font-family: 'Roboto', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background: #DDD;
+  margin: 2em;
+}
+
+.app {
+  background: #FFF;
+}
+
+.navigation {
+  background: #FAFAFA;
+  color: lightgray;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  flex: 33.33%;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  font-size: 0.9em;
+}
+
+.navItem:visited {
+  color: lightgray;
+}
+
+.navItem li {
+  text-align: center;
+  padding: 0.5em 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.navItem li i {
+  font-size: 1.4em;
+}
+.navItem li span {
+  padding-top: 0.2em;
+  padding-left: 0.25em;
+}
+
+.active {
+  border-bottom: 2px solid orangered;
+  color: orangered !important;
+}
+
+.appName {
+  background: #333;
+  color: #FAFAFA;
+  text-align: center;
+  padding: 0.3em 0;
+  font-size: 0.8em;
+}
+
+.searchArtist {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FFF;
+  padding: 0.75em 1em;
+  display: block;
+  font-size: 0.9em;
+  font-weight: 300;
+  line-height: 1.2em;
+  outline: 0;
+  border: none;
+  width: 92%;
+  border-bottom: 1px solid #FAFAFA;
+}
+
+.notPlaying {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #FFF;
+  padding: 1em 2em;
+  box-shadow: 0 -3px 5px #ddd;
+  font-size: 0.9em;
+  color: lightgray;
+  width: 84%;
+  margin-left: 1px;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  background: #FAFAFA;
+  box-shadow: 0 -1px 1px #ddd;
+}
+
+.placeholder {
+  color: lightgray;
+  font-size: 1.2em;
+  font-weight: 300;
+}
