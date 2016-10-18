@@ -2,28 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import * as styles from '../stylesheets/main';
 import CurrentTrack from './currentTrack';
+import {connect} from 'react-redux';
 
-export default class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
-    
-    this.state = {
-      currentSong: new Object()
-    };
-  }
-
-  play(song) {
-    this.setState({ currentSong: song });
+    console.log(props);
   }
 
   render() {
-    let currentTrack = this.state.currentSong ? (
-      <CurrentTrack
-        key={this.state.currentSong.id}
-        song={this.state.currentSong}
-      />
-    ) : null;
-
     return (
       <div className={styles.app}>
         <div className={styles.appName}>Audiense Player</div>
@@ -50,11 +37,12 @@ export default class App extends Component {
 
         <div className={styles.container}>
           {this.props.children}
-
-          { currentTrack ? currentTrack : 
-            <div className={styles.notPlaying}>No track to play...</div> }
+          
+          <div className={styles.notPlaying}>No track to play...</div>
         </div>
       </div>
     )
   }
 }
+
+export default connect()(App);
