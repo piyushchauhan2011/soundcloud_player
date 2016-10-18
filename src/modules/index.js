@@ -47,13 +47,15 @@ export class Search extends Component {
   //   source.start(0);
   // }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       songs: new Array(),
       selectedSong: new Object()
     };
+
+    this.handleChange = this.handleChange.bind(this);
 
     search('stones throw')
       .then((result) => {
@@ -80,6 +82,23 @@ export class Search extends Component {
   }
 
   render() {
+    let tracks = this.state.songs.map((song) => {
+      let duration = Math.round(song.duration / 1000);
+      duration = [
+        Math.round(duration / 60),
+        duration % 60
+      ];
+      return (
+        <Track
+          key={song.id}
+          artworkUrl={song.artwork_url}
+          title={song.title}
+          username={song.user.username}
+          duration={duration}
+        />
+      );
+    });
+
     return (
       <div>
         <input
@@ -87,9 +106,13 @@ export class Search extends Component {
           placeholder="Search Artist"
           className={styles.searchArtist}
           onChange={this.handleChange}
-        />
-        
-        <div className={styles.placeholder}>
+          />
+        <div className={styles.tracks}>
+          {tracks}
+        </div>
+        <div className={styles.placeholder}
+          style={ tracks ? { display: 'none' } : '' }
+        >
           No tracks
         </div>
       </div>
@@ -118,25 +141,38 @@ export class About extends Component {
 }
 
 export class Track extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <div className="song">
-        <div className="artworkUrl">
-          <image src={this.props.artworkUrl} className="artworkImage"/>
+      <div className={styles.song}>
+        <img src={this.props.artworkUrl} className={styles.artwork} />
+        <div className={styles.songMetadata}>
+          <div className={styles.title}>{this.props.title}</div>
+          <div className={styles.artist}>
+            from {this.props.username} {this.props.duration[0]}:{this.props.duration[1]}
+          </div>
         </div>
-        <div className="title">{this.props.title}</div>
-        <div className="artist">
-          from {this.props.username} {this.props.duration}
-        </div>
-        <div className="play">
-          <i class="material-icons">play_arrow</i>
-        </div>
-        <div className="queue">
-          <i class="material-icons">playlist_add</i>
+        <div className={styles.controls}>
+          <button className={styles.btn}>
+            <i className="material-icons">play_arrow</i>
+          </button>
+          <button className={styles.btn}>
+            <i className="material-icons">playlist_add</i>
+          </button>
         </div>
       </div>
     );
   }
+}
+
+Track.PropTypes = {
+  artworkUrl: React.PropTypes.string,
+  title: React.PropTypes.string,
+  username: React.PropTypes.string,
+  duration: React.PropTypes.number
 }
 
 // export class TrackList extends Component {
