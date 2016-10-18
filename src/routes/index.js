@@ -1,6 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { App, Search, Queue, About } from 'modules';
+
+import App from 'components/app';
+import Search from 'components/search';
+import Queue from 'components/queue';
+import About from 'components/about';
 
 const routes = () =>
   <Route path="/" component={App}>
