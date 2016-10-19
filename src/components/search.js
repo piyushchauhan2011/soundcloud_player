@@ -1,38 +1,30 @@
 import React, { Component } from 'react';
-import { search } from '../api';
 import * as styles from '../stylesheets/main';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Track from './track';
+import * as PlayerActions from '../actions';
 
-export default class Search extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      searching: false,
-      songs: new Array()
-    };
-
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(ev) {
     let query = ev.target.value;
-    this.setState({ searching: true });
-    search(query)
-      .then((result) => {
-        this.setState({ songs: result.data });
-        this.setState({ searching: false });
-      });
+    this.props.queryTracks(query);
   }
 
   render() {
-    let tracks = this.state.songs.map((song) => {
+    const { tracks } = this.props;
+    let tracksEl = tracks.map((song) => {
       return (
         <Track
           key={song.id}
           song={song}
-        />
+          />
       );
     });
 
@@ -45,17 +37,26 @@ export default class Search extends Component {
           onChange={this.handleChange}
           />
         <div className={styles.tracks}>
-          {tracks}
+          {tracksEl}
         </div>
-        { this.state.searching ?
-          <div className={styles.placeholder}>
-            Searching...
-          </div> : null }
-        { tracks ? null :
+        {tracksEl ? null :
           <div className={styles.placeholder}>
             No tracks
-          </div> }
+          </div>}
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    tracks: state.tracks,
+    currentTrack: state.currentTrack
+  }
+}
+
+function mapActionCreatorsToProps(dispatch) {
+  return bindActionCreators(PlayerActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapActionCreatorsToProps)(Search);

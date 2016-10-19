@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 export class App extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   render() {
@@ -37,7 +36,7 @@ export class App extends Component {
 
         <div className={styles.container}>
           {this.props.children}
-          
+
           <div className={styles.notPlaying}>No track to play...</div>
         </div>
       </div>

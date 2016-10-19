@@ -1,4 +1,15 @@
-export default function songs(state, action) {
-  console.log(state, action)
-  return state;
+const defaultState = {
+  tracks: [],
+  currentTrack: null
+};
+
+export default function tracks(state = defaultState, action) {
+  switch (action.type) {
+    case 'TRACKS_LOADED':
+      return {...state,
+        tracks: action.tracks
+      };
+    default:
+      return state;
+  }
 }

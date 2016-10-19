@@ -4,9 +4,6 @@ import * as styles from '../stylesheets/main';
 export default class Track extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      stream: null
-    };
   }
 
   render() {
