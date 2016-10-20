@@ -23,10 +23,10 @@ export default class Track extends Component {
           </div>
         </div>
         <div className={styles.controls}>
-          <button className={styles.btn}>
+          <button className={styles.btn} onClick={this.props.playTrack.bind(null,this.props.i)}>
             <i className="material-icons">play_arrow</i>
           </button>
-          <button className={styles.btn}>
+          <button className={styles.btn} onClick={this.props.pauseTrack}>
             <i className="material-icons">playlist_add</i>
           </button>
         </div>
