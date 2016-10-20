@@ -31,10 +31,10 @@ export class Search extends Component {
           className={styles.searchArtist}
           onChange={this.handleChange}
           />
-        <div className={styles.tracks}>
-          {tracksEl}
-        </div>
-        {tracksEl ? null :
+        {tracksEl ? 
+          <div className={styles.tracks}>
+            {tracksEl}
+          </div> :
           <div className={styles.placeholder}>
             No tracks
           </div>}

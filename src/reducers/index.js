@@ -1,5 +1,6 @@
 const defaultState = {
   tracks: [],
+  queue: [],
   currentTrack: null
 };
 
@@ -48,6 +49,9 @@ export default function tracks(state = defaultState, action) {
       });
     case 'PAUSE_TRACK':
       pauseSong(state)
+      return state;
+    case 'QUEUE_TRACK':
+      state.queue.push(action.track);
       return state;
     default:
       return state;

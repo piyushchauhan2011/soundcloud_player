@@ -59,7 +59,8 @@ export class App extends Component {
 function mapStateToProps(state) {
   return {
     tracks: state.tracks,
-    currentTrack: state.currentTrack
+    currentTrack: state.currentTrack,
+    queue: state.queue
   }
 }
 

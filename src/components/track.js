@@ -26,9 +26,12 @@ export default class Track extends Component {
           <button className={styles.btn} onClick={this.props.playTrack.bind(null,this.props.i)}>
             <i className="material-icons">play_arrow</i>
           </button>
-          <button className={styles.btn} onClick={this.props.pauseTrack}>
-            <i className="material-icons">playlist_add</i>
-          </button>
+          { 
+            (this.props.location.pathname === '/queue') ? null :
+              <button className={styles.btn} onClick={this.props.queueTrack.bind(null, song)}>
+                <i className="material-icons">playlist_add</i>
+              </button>
+          }
         </div>
       </div>
     );
