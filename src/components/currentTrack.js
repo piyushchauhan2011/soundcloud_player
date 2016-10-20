@@ -4,29 +4,6 @@ import * as styles from '../stylesheets/currentTrack';
 export default class CurrentTrack extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      stream: null
-    };
-    this.play = this.play.bind(this);
-    this.pause = this.pause.bind(this);
-  }
-
-  play() {
-    if (this.state.stream) {
-      this.state.stream.play();
-    } else {
-      let song = this.props.song;
-      let stream = new Audio();
-      stream.src = song.stream_url + `?client_id=${process.env.CLIENT_ID}`;
-      stream.play();
-      this.setState({ stream: stream });
-    }
-  }
-
-  pause() {
-    if (this.state.stream) {
-      this.state.stream.pause();
-    }
   }
 
   render() {
@@ -46,8 +23,8 @@ export default class CurrentTrack extends Component {
           </div>
         </div>
         <div className={styles.controls}>
-          <button className={styles.btn} onClick={this.play}>
-            <i className="material-icons">play_arrow</i>
+          <button className={styles.btn} onClick={this.props.pauseTrack}>
+            <i className="material-icons">pause_arrow</i>
           </button>
         </div>
       </div>

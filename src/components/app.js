@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import * as styles from '../stylesheets/main';
 import CurrentTrack from './currentTrack';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as PlayerActions from '../actions';
 
 export class App extends Component {
   constructor(props) {
@@ -35,13 +37,34 @@ export class App extends Component {
         </ul>
 
         <div className={styles.container}>
-          {this.props.children}
-
-          <div className={styles.notPlaying}>No track to play...</div>
+          {
+            React.cloneElement(
+              this.props.children,
+              Object.assign({},this.props)
+            )
+          }
+          
+          {
+            this.props.currentTrack ?
+              <CurrentTrack key={this.props.currentTrack.id} i={this.props.currentTrack.id} song={this.props.currentTrack} {...this.props} /> :
+              <div className={styles.notPlaying}>No track to play...</div>
+          }
+          
         </div>
       </div>
     )
   }
 }
 
-export default connect()(App);
+function mapStateToProps(state) {
+  return {
+    tracks: state.tracks,
+    currentTrack: state.currentTrack
+  }
+}
+
+function mapActionCreatorsToProps(dispatch) {
+  return bindActionCreators(PlayerActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapActionCreatorsToProps)(App);

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import * as styles from '../stylesheets/main';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { throttle } from 'underscore';
-
 import Track from './track';
-import * as PlayerActions from '../actions';
 
 export class Search extends Component {
   constructor(props) {
@@ -14,7 +10,7 @@ export class Search extends Component {
   }
 
   handleChange(ev) {
-    let query = this.search.value;
+    let query = this.refs.search.value;
     this.props.queryTracks(query);
   }
 
@@ -22,19 +18,14 @@ export class Search extends Component {
     const { tracks } = this.props;
     let tracksEl = tracks.map((song, i) => {
       return (
-        <Track
-          key={i}
-          i={i}
-          song={song}
-          {...this.props}
-          />
+        <Track key={i} i={i} song={song} {...this.props} />
       );
     });
 
     return (
       <div>
         <input
-          ref={ ref => this.search = ref }
+          ref="search"
           type="text"
           placeholder="Search Artist"
           className={styles.searchArtist}
@@ -52,15 +43,4 @@ export class Search extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    tracks: state.tracks,
-    currentTrack: state.currentTrack
-  }
-}
-
-function mapActionCreatorsToProps(dispatch) {
-  return bindActionCreators(PlayerActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapActionCreatorsToProps)(Search);
+export default Search;
