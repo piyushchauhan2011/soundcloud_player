@@ -3,15 +3,28 @@ const defaultState = {
   currentTrack: null
 };
 
-function playSong(state, trackIndex) {
-  let track = state.tracks[trackIndex];
+function newStream(track) {
   let stream = new Audio();
   stream.src = track.stream_url + `?client_id=${process.env.CLIENT_ID}`;
   stream.play();
   track.stream = stream;
 }
 
-function stopCurrent(state) {
+function playSong(state, track) {
+  if (state.currentTrack) {
+    if (state.currentTrack.id === track.id) {
+      let stream = state.currentTrack.stream;
+      if (stream.paused) stream.play();
+    } else {
+      pauseSong(state);
+      newStream(track);
+    }
+  } else {
+    newStream(track);
+  }
+}
+
+function pauseSong(state) {
   let track = state.currentTrack;
   if (track) {
     let stream = state.currentTrack.stream;
@@ -26,16 +39,16 @@ export default function tracks(state = defaultState, action) {
         tracks: action.tracks
       });
     case 'PLAY_TRACK':
-      stopCurrent(state);
-      playSong(state, action.trackIndex);
+      let track = state.tracks.find((track) => {
+        return track.id === action.trackIndex;
+      });
+      playSong(state, track);
       return Object.assign({},state,{
-        currentTrack: state.tracks[action.trackIndex]
+        currentTrack: track
       });
     case 'PAUSE_TRACK':
-      stopCurrent(state)
-      return Object.assign({},state,{
-        currentTrack: null
-      });
+      pauseSong(state)
+      return state;
     default:
       return state;
   }

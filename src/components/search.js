@@ -18,7 +18,7 @@ export class Search extends Component {
     const { tracks } = this.props;
     let tracksEl = tracks.map((song, i) => {
       return (
-        <Track key={i} i={i} song={song} {...this.props} />
+        <Track key={song.id} i={song.id} song={song} {...this.props} />
       );
     });
 
