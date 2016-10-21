@@ -19,11 +19,11 @@ export default class CurrentTrack extends Component {
         <div className={styles.songMetadata}>
           <div className={styles.title}>{song.title}</div>
           <div className={styles.artist}>
-            by {song.user.username}
+            by <a href="#" className={styles.user}>{song.user.username}</a>
           </div>
         </div>
         <div className={styles.controls}>
-          <button className={styles.btn} onClick={this.props.pauseTrack}>
+          <button className={styles.fabBtn} onClick={this.props.pauseTrack}>
             <i className="material-icons">pause_arrow</i>
           </button>
         </div>

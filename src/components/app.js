@@ -44,10 +44,10 @@ export class App extends Component {
             )
           }
           
-          <div className={styles.notPlaying}>{
+          <div className={styles.statusContainer}>{
             this.props.currentTrack ?
               <CurrentTrack key={this.props.currentTrack.id} i={this.props.currentTrack.id} song={this.props.currentTrack} {...this.props} /> :
-              <span>No track to play...</span>
+              <div className={styles.notPlaying}>No track to play...</div>
           }</div>
           
         </div>

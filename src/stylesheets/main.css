@@ -14,7 +14,7 @@ i {
 
 .navigation {
   background: #FAFAFA;
-  color: lightgray;
+  color: gray;
   display: flex;
   padding: 0;
   margin: 0;
@@ -28,7 +28,7 @@ i {
 }
 
 .navItem:visited {
-  color: lightgray;
+  color: gray;
 }
 
 .navItem li {
@@ -79,17 +79,20 @@ i {
   z-index: 1;
 }
 
-.notPlaying {
+.statusContainer {
   position: absolute;
   bottom: 0;
   left: 0;
   background: #FFF;
-  padding: 1em 2em;
   box-shadow: 0 -2px 10px #ddd;
   font-size: 0.9em;
-  color: lightgray;
-  width: 84.5%;
+  color: gray;
+  width: 100%;
   z-index: 1;
+}
+
+.notPlaying {
+  padding: 2em;
 }
 
 .container {
@@ -103,7 +106,7 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: lightgray;
+  color: gray;
   font-size: 1.2em;
   font-weight: 300;
   height: 500px;
@@ -151,7 +154,7 @@ i {
 
 .artist {
   font-size: 0.6em;
-  color: lightgray;
+  color: gray;
 }
 
 .controls {
