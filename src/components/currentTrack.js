@@ -24,7 +24,7 @@ export default class CurrentTrack extends Component {
         </div>
         <div className={styles.controls}>
           <button className={styles.fabBtn} onClick={this.props.pauseTrack}>
-            <i className="material-icons">pause_arrow</i>
+            <i style={{ margin: '5px' }}className="material-icons">pause_arrow</i>
           </button>
         </div>
       </div>
