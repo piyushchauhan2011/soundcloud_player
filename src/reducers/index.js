@@ -4,16 +4,17 @@ const defaultState = {
   currentTrack: null
 };
 
-function newStream(state, track) {
+function newStream(state) {
+  let song = state.queue.shift();
   let stream = new Audio();
-  stream.src = track.stream_url + `?client_id=${process.env.CLIENT_ID}`;
+  stream.src = song.stream_url + `?client_id=${process.env.CLIENT_ID}`;
   stream.play();
-  stream.addEventListener('ended', function(e) {
+  stream.addEventListener('ended', (e) => {
     let song = state.queue.shift();
     playSong(state, song);
   });
   window.stream = stream;
-  track.stream = stream;
+  song.stream = stream;
 }
 
 function playSong(state, track) {
@@ -23,10 +24,10 @@ function playSong(state, track) {
       if (stream.paused) stream.play();
     } else {
       pauseSong(state);
-      newStream(state, track);
+      newStream(state);
     }
   } else {
-    newStream(state, track);
+    newStream(state);
   }
 }
 
@@ -57,6 +58,7 @@ export default function tracks(state = defaultState, action) {
       let track = state.tracks.find((track) => {
         return track.id === action.trackIndex;
       });
+      queueSong(state, track);
       playSong(state, track);
       return Object.assign({},state,{
         currentTrack: track
