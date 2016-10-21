@@ -4,8 +4,11 @@ const defaultState = {
   currentTrack: null
 };
 
-function newStream(state) {
-  let song = state.queue.shift();
+function newStream(state, track) {
+  let song;
+  do {
+    song = state.queue.shift();
+  } while (song.id !== track.id);
   let stream = new Audio();
   stream.src = song.stream_url + `?client_id=${process.env.CLIENT_ID}`;
   stream.play();
@@ -24,10 +27,10 @@ function playSong(state, track) {
       if (stream.paused) stream.play();
     } else {
       pauseSong(state);
-      newStream(state);
+      newStream(state, track);
     }
   } else {
-    newStream(state);
+    newStream(state, track);
   }
 }
 
