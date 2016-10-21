@@ -37,11 +37,12 @@ export class App extends Component {
         </ul>
 
         <div className={styles.container}>
-          {
+          { 
+            this.props.children ?
             React.cloneElement(
               this.props.children,
               Object.assign({},this.props)
-            )
+            ) : null
           }
           
           <div className={styles.statusContainer}>{
