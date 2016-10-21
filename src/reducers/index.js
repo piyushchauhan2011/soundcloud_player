@@ -13,7 +13,7 @@ function newStream(state, track) {
   stream.src = song.stream_url + `?client_id=${process.env.CLIENT_ID}`;
   stream.play();
   stream.addEventListener('ended', (e) => {
-    let song = state.queue.shift();
+    let song = state.queue[0];
     playSong(state, song);
   });
   window.stream = stream;
