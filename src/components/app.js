@@ -44,11 +44,11 @@ export class App extends Component {
             )
           }
           
-          {
+          <div className={styles.notPlaying}>{
             this.props.currentTrack ?
               <CurrentTrack key={this.props.currentTrack.id} i={this.props.currentTrack.id} song={this.props.currentTrack} {...this.props} /> :
-              <div className={styles.notPlaying}>No track to play...</div>
-          }
+              <span>No track to play...</span>
+          }</div>
           
         </div>
       </div>

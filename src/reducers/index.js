@@ -33,6 +33,15 @@ function pauseSong(state) {
   }
 }
 
+function queueSong(state, track) {
+  let found = state.queue.find((song) => {
+    return (song.id === track.id);
+  });
+  if (!found) {
+    state.queue.push(track);
+  }
+}
+
 export default function tracks(state = defaultState, action) {
   switch (action.type) {
     case 'TRACKS_LOADED':
@@ -51,7 +60,7 @@ export default function tracks(state = defaultState, action) {
       pauseSong(state)
       return state;
     case 'QUEUE_TRACK':
-      state.queue.push(action.track);
+      queueSong(state, action.track);
       return state;
     default:
       return state;
